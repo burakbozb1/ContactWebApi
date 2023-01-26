@@ -25,8 +25,8 @@ namespace ContactWeb.Api.Middlewares
                     CustomResponseDto<NoContentDto> response;
                     if (statusCode == 500)
                     {
-                        //response = CustomResponseDto<NoContentDto>.Fail(statusCode, "Beklenmedik bir hata oluştu.");
-                        response = CustomResponseDto<NoContentDto>.Fail(statusCode, exceptionFeature.Error.Message);
+                        response = CustomResponseDto<NoContentDto>.Fail(statusCode, "Unexpected error. Try again later.");
+                        //response = CustomResponseDto<NoContentDto>.Fail(statusCode, exceptionFeature.Error.Message);
                     }
                     else
                     {
