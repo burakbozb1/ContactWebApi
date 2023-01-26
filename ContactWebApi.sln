@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactWeb.Core", "ContactWeb.Core\ContactWeb.Core.csproj", "{A68B4335-9AB1-43AF-B1E7-0ECFCF5F6BC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactWeb.Core", "ContactWeb.Core\ContactWeb.Core.csproj", "{A68B4335-9AB1-43AF-B1E7-0ECFCF5F6BC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactWeb.Repository", "ContactWeb.Repository\ContactWeb.Repository.csproj", "{B0110776-5F60-4764-9413-19997CF586F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactWeb.Repository", "ContactWeb.Repository\ContactWeb.Repository.csproj", "{B0110776-5F60-4764-9413-19997CF586F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactWeb.Service", "ContactWeb.Service\ContactWeb.Service.csproj", "{0B7A4F1A-8605-4F0B-8D9A-23429493B4AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactWeb.Service", "ContactWeb.Service\ContactWeb.Service.csproj", "{0B7A4F1A-8605-4F0B-8D9A-23429493B4AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactWeb.Api", "ContactWeb.Api\ContactWeb.Api.csproj", "{307752AA-219F-479F-A2AC-584FA5C3B0CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactWeb.Api", "ContactWeb.Api\ContactWeb.Api.csproj", "{307752AA-219F-479F-A2AC-584FA5C3B0CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollection", "PostmanCollection", "{2EDA3643-042A-416B-A25E-912B072B3258}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\ContactPostman\ContactApi.postman_collection.json = ..\..\..\Desktop\ContactPostman\ContactApi.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
