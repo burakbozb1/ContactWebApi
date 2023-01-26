@@ -11,11 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactWeb.Service", "Conta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactWeb.Api", "ContactWeb.Api\ContactWeb.Api.csproj", "{307752AA-219F-479F-A2AC-584FA5C3B0CE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollection", "PostmanCollection", "{2EDA3643-042A-416B-A25E-912B072B3258}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\ContactPostman\ContactApi.postman_collection.json = ..\..\..\Desktop\ContactPostman\ContactApi.postman_collection.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
