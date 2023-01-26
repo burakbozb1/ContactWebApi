@@ -26,28 +26,6 @@ namespace ContactWeb.Api.Controllers
             _logger = logger;
         }
 
-        /// <summary>
-        /// for testing.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var contact = await _contactService.Where(x => x.Id == id)
-                .Include(x => x.User)
-                .Include(x => x.OldContacts)
-                .Include(x => x.Location)
-                .SingleOrDefaultAsync();
-            if (contact != null)
-            {
-                _logger.LogCritical($"{id} contact listed.");
-                return Ok(contact);
-            }
-            return NotFound();
-        }
-
         [HttpGet("mycontacts")]
         public async Task<IActionResult> GetMyContacts()
         {
