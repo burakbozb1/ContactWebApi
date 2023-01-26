@@ -1,4 +1,5 @@
-﻿using ContactWeb.Core.Entities;
+﻿using Bogus;
+using ContactWeb.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

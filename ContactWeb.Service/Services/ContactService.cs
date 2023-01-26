@@ -48,7 +48,18 @@ namespace ContactWeb.Service.Services
                 return mappedContact;
             }
             throw new NotFoundException("Add contact failed");
-            
+
+        }
+
+        public async Task<ContactWithOldContactsDto> GetMyContactAsync(User user, long contactId)
+        {
+            var contacts = await _contactRepository.Where(x => x.UserId == user.Id && x.Id == contactId)
+                .Include(x => x.OldContacts)
+                .Include(x => x.Location)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
+            var mappedContacts = _mapper.Map<ContactWithOldContactsDto>(contacts);
+            return mappedContacts;
         }
 
         public async Task<List<ContactDto>> GetMyContactsAsync(User user)
@@ -96,50 +107,119 @@ namespace ContactWeb.Service.Services
                 .Include(x => x.User)
                 .Include(x => x.OldContacts)
                 .Include(x => x.Location)
-                .ThenInclude(x => x.Contact)
                 .SingleOrDefaultAsync();
+
+            //var contact = await _contactRepository.Where(x => x.Id == newContact.Id && x.UserId == user.Id)
+            //.SingleOrDefaultAsync();
             if (contact != null)
             {
                 List<OldContact> updatedDatas = new List<OldContact>();
                 if (contact.Name != newContact.Name)
                 {
-                    updatedDatas.Add(new OldContact() { ChangedKey = "Name", OldValue = contact.Name, NewValue = newContact.Name, Contact = contact, ContactId = contact.Id });
+                    updatedDatas.Add(new OldContact()
+                    {
+                        ChangedKey = "Name",
+                        OldValue = contact.Name,
+                        NewValue = newContact.Name,
+                        Contact = contact,
+                        ContactId = contact.Id,
+                        CreatedDate = contact.CreatedDate,
+                        UpdatedDate = DateTime.Now
+                    });
                 }
 
                 if (contact.MiddleName != newContact.MiddleName)
                 {
-                    updatedDatas.Add(new OldContact() { ChangedKey = "MiddleName", OldValue = contact.MiddleName, NewValue = newContact.MiddleName, Contact = contact, ContactId = contact.Id });
+                    updatedDatas.Add(new OldContact()
+                    {
+                        ChangedKey = "MiddleName",
+                        OldValue = contact.MiddleName,
+                        NewValue = newContact.MiddleName,
+                        Contact = contact,
+                        ContactId = contact.Id,
+                        CreatedDate = contact.CreatedDate,
+                        UpdatedDate = DateTime.Now
+                    });
                 }
 
                 if (contact.Surname != newContact.Surname)
                 {
-                    updatedDatas.Add(new OldContact() { ChangedKey = "Surname", OldValue = contact.Surname, NewValue = newContact.Surname, Contact = contact, ContactId = contact.Id });
+                    updatedDatas.Add(new OldContact()
+                    {
+                        ChangedKey = "Surname",
+                        OldValue = contact.Surname,
+                        NewValue = newContact.Surname,
+                        Contact = contact,
+                        ContactId = contact.Id,
+                        CreatedDate = contact.CreatedDate,
+                        UpdatedDate = DateTime.Now
+                    });
                 }
 
                 if (contact.PhoneNumber != newContact.PhoneNumber)
                 {
-                    updatedDatas.Add(new OldContact() { ChangedKey = "PhoneNumber", OldValue = contact.PhoneNumber, NewValue = newContact.PhoneNumber, Contact = contact, ContactId = contact.Id });
+                    updatedDatas.Add(new OldContact()
+                    {
+                        ChangedKey = "PhoneNumber",
+                        OldValue = contact.PhoneNumber,
+                        NewValue = newContact.PhoneNumber,
+                        Contact = contact,
+                        ContactId = contact.Id,
+                        CreatedDate = contact.CreatedDate,
+                        UpdatedDate = DateTime.Now
+                    });
                 }
 
                 if (contact.Note != newContact.Note)
                 {
-                    updatedDatas.Add(new OldContact() { ChangedKey = "Note", OldValue = contact.Note, NewValue = newContact.Note, Contact = contact, ContactId = contact.Id });
+                    updatedDatas.Add(new OldContact()
+                    {
+                        ChangedKey = "Note",
+                        OldValue = contact.Note,
+                        NewValue = newContact.Note,
+                        Contact = contact,
+                        ContactId = contact.Id,
+                        CreatedDate = contact.CreatedDate,
+                        UpdatedDate = DateTime.Now
+                    });
                 }
 
                 if (contact.Adress != newContact.Adress)
                 {
-                    updatedDatas.Add(new OldContact() { ChangedKey = "Adress", OldValue = contact.Adress, NewValue = newContact.Adress, Contact = contact, ContactId = contact.Id });
+                    updatedDatas.Add(new OldContact()
+                    {
+                        ChangedKey = "Adress",
+                        OldValue = contact.Adress,
+                        NewValue = newContact.Adress,
+                        Contact = contact,
+                        ContactId = contact.Id,
+                        CreatedDate = contact.CreatedDate,
+                        UpdatedDate = DateTime.Now
+                    });
                 }
 
-                //if (contact.Location != null && newContact.Location != null)
-                //{
-                //    if (contact.Location.Latitude != newContact.Location.Latitude)
-                //    {
-                //        updatedDatas.Add(new OldContact() { ChangedKey = "Latitude", OldValue = contact.Location.Latitude, NewValue = newContact.Location.Latitude, Contact = contact, ContactId = contact.Id });
-                //    }
-                //}
+                if (contact.Location != null && newContact.Location != null)
+                {
+                    if ((contact.Location.Latitude != newContact.Location.Latitude) || (contact.Location.Longitude != newContact.Location.Longitude))
+                    {
+                        updatedDatas.Add(new OldContact()
+                        {
+                            ChangedKey = "Latitude",
+                            OldValue = $"Latitude :  {contact.Location.Latitude} - Longitude : {contact.Location.Longitude}",
+                            NewValue = $"Longitude :  {contact.Location.Longitude} - Longitude : {contact.Location.Longitude}",
+                            Contact = contact,
+                            ContactId = contact.Id,
+                            CreatedDate = contact.CreatedDate,
+                            UpdatedDate = DateTime.Now
+                        });
+                    }
+                }
 
                 contact.UpdatedDate = DateTime.Now;
+                if (contact.OldContacts == null)
+                {
+                    contact.OldContacts = new List<OldContact>();
+                }
                 contact.OldContacts.AddRange(updatedDatas);
                 _contactRepository.Update(contact);
                 await _unitOfWork.CommitAsync();

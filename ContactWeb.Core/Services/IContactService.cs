@@ -12,6 +12,8 @@ namespace ContactWeb.Core.Services
     {
         Task<List<ContactDto>> GetMyContactsAsync(User user);
 
+        Task<ContactWithOldContactsDto> GetMyContactAsync(User user, long contactId);
+
         Task<ContactDto> AddContactAsync(User user, AddContactDto newContact);
 
         Task<bool> UpdateContactAsync(User user, ContactDto newContact);

@@ -21,6 +21,8 @@ namespace ContactWeb.Service.Mapping
             CreateMap<Contact, ContactDto>().ReverseMap();
             CreateMap<Location, LocationDto>().ReverseMap();
             CreateMap<SearchLocationDto, LocationDto>().ReverseMap();
+            CreateMap<OldContact, OldContactDto>().ReverseMap();
+            CreateMap<Contact, ContactWithOldContactsDto>().ReverseMap();
         }
     }
 }

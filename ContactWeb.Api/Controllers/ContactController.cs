@@ -56,6 +56,14 @@ namespace ContactWeb.Api.Controllers
             return CreateActionResult(CustomResponseDto<List<ContactDto>>.Success(201, result));
         }
 
+        [HttpGet("getcontact/{id}")]
+        public async Task<IActionResult> GetMyContacts(long id)
+        {
+            var user = await _userService.GetByIdAsync(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value));
+            var result = await _contactService.GetMyContactAsync(user,id);
+            return CreateActionResult(CustomResponseDto<ContactWithOldContactsDto>.Success(201, result));
+        }
+
         [HttpPost("addcontact")]
         public async Task<IActionResult> AddContact(AddContactDto newContact)
         {
