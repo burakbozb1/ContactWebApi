@@ -12,7 +12,7 @@ using NLayer.Repository;
 namespace ContactWeb.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230124200432_init")]
+    [Migration("20230126014059_init")]
     partial class init
     {
         /// <inheritdoc />
